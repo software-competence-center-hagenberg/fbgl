@@ -1,0 +1,10 @@
+COMPILER Parse
+PRODUCTIONS
+  Parse = AdvExpr.
+  AdvExpr = Expr.
+  Expr = Term.
+  Term = Factor.
+  Factor = Num.
+  Num = Digit.
+  Digit = "1".
+END Parse.

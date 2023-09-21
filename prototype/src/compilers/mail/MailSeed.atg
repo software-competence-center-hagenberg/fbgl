@@ -1,0 +1,11 @@
+COMPILER Parse
+TOKENS
+  Mail = String "@" String "." Tag.
+  String = Char.
+  Tag = Char Char.
+  Char = "a".
+
+PRODUCTIONS
+Parse = Mail.
+
+END Parse.

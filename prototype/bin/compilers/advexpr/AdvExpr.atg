@@ -1,0 +1,9 @@
+COMPILER AdvExpr
+PRODUCTIONS
+  AdvExpr = Expr.
+  Expr = Term [ ("+"|"-") Expr ].
+  Term = Factor [ ("*"|"/") Term ].
+  Factor = Num | "(" Expr ")".
+  Num = Digit [ Num ].
+  Digit = "1" | "2" | "3".
+END AdvExpr.

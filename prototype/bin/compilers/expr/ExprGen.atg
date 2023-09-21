@@ -1,0 +1,10 @@
+COMPILER Expr
+TOKENS
+
+  Expr = Term [ ("+"|"-") Term ].
+  Term = Factor [ ("*"|"/") Factor ].
+  Factor = "1" | "2" | "3" | "(" Expr ")".
+
+PRODUCTIONS
+  
+END Expr.

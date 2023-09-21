@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="lib/eknows-core-1.0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/eknows-frontend-java-1.0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.cdt.core-6.11.1.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.commands-3.11.100.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.contenttype-3.7.900.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.expressions-3.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.filesystem-1.9.100.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.jobs-3.10.1100.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.resources-3.13.500.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime-3.20.100.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.common-2.17.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore.xmi-2.16.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore-2.20.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.app-1.5.100.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common-3.14.100.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.preferences-3.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.registry-3.11.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jdt.core-3.18.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.osgi.compatibility.state-1.1.500.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.osgi-3.16.200.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.text-3.13.100.jar"/>
+	<classpathentry kind="lib" path="lib/eknows-commons-1.0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/eknows-frontend-common-1.0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/eknows-rulebook-1.0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
