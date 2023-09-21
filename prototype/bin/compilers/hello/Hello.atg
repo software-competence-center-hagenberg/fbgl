@@ -1,4 +1,0 @@
-COMPILER Hello
-PRODUCTIONS
-  Hello = ("H" | "h") ("E" | "e") ("L" | "l") ("L" | "l") ("O" | "o").
-END Hello.

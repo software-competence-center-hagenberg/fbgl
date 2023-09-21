@@ -1,8 +1,0 @@
-COMPILER Parse
-TOKENS
-Hello = "h" "e" "l" "l" "o".
-
-PRODUCTIONS
-Parse = Hello.
-
-END Parse.
