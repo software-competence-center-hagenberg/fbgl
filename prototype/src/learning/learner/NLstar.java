@@ -55,7 +55,8 @@ public class NLstar {
 			counterexample.remove(LAMBDA);
 			
 			System.out.println("Adding counterexample ... (\"" + counterexample + "\")");
-			this.addCounterexample(counterexample);
+			boolean noErr = this.addCounterexample(counterexample);
+			if (!noErr) { return null; }
 						
 			//System.out.println("Making table closed and consistent ... ");
 			this.makeTableClosedAndConsistent();
@@ -146,7 +147,11 @@ public class NLstar {
 		return null;		
 	}
 		
-	private void addCounterexample(Element counterexample) {
+	private boolean addCounterexample(Element counterexample) {
+		
+		// Check if all non-terminals in the counterexample are indeed in the current alphabet - if not abort learning
+		if (!this.A.containsAll(counterexample.getNonTerminals())) { return false; }
+		
 		
 		if (!this.V.contains(counterexample)) { this.V.add(counterexample); }
 		
@@ -159,6 +164,7 @@ public class NLstar {
 			}
 			if (!this.V.contains(seq)) { this.V.add(seq); }
 		}
+		return true;
 	}
 	
 	/*

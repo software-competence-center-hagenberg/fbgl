@@ -1,0 +1,31 @@
+COMPILER parse
+TOKENS
+
+			url 	= httpaddress | ftpaddress | telnetaddress | gopheraddress.
+			httpaddress 	= 'h' 't' 't' 'p' ':' '/' '/' hostport '/' path '?' search.
+			ftpaddress 		= 'f' 't' 'p' ':' '/' '/' login '/' path.
+			telnetaddress 	= 't' 'e' 'l' 'n' 'e' 't' ':' '/' '/' login.
+			gopheraddress 	= 'g' 'o' 'p' 'h' 'e' 'r' ':' '/' '/' hostport '/' gtype selector.
+			login 			= user ':' password '@' hostport.
+			hostport 		= host ':' port.
+			host 			= hostname | hostnumber.
+			hostname 		= ialpha.
+			hostnumber 		= digits '.' digits '.' digits '.' digits.
+			port 			= digits.
+			path 			= xalphas.
+			search 			= xalphas.
+			selector 		= path.
+			user 			= xalphas.
+			password 		= xalphas.
+			gtype 			= xalpha.
+			xalpha 			= safe | extra.
+			xalphas 		= xalpha.
+			ialpha 			= alpha.
+			alpha 			= 'a'.
+			digit 			= '1'.
+			safe 			= '&'.
+			extra 			= '!'.
+			digits 			= digit.
+PRODUCTIONS
+	parse 			= url.
+END parse.

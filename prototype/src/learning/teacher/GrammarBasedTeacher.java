@@ -289,7 +289,7 @@ public class GrammarBasedTeacher extends Teacher {
 				
 		partialGrammar.removeRulesWithSingleAssignments();
 		for (Rule rule : partialGrammar.getRuleTable()) { 
-			rule.replace(partialGrammar.getStartSymbol(), parentRule.getKey()); 
+			rule.replace(partialGrammar.getStartSymbol(), parentRule.getKey());
 		}	
 		Element body = partialGrammar.getRule(partialGrammar.getStartSymbol()).getBody();
 		partialGrammar.removeRule(partialGrammar.getRule(partialGrammar.getStartSymbol()));

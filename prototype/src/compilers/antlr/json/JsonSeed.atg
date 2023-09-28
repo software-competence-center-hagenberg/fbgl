@@ -1,0 +1,25 @@
+COMPILER parse
+TOKENS
+  json = element.
+  element = ws value ws.
+  elements = element.
+  value = object | number | array | "t".
+  object = "{" ws string ws ":" element "," members "}". 
+  string = "!" characters "!".
+  characters = "^" | character characters.
+  character = "a".
+  members = member.
+  member = ws string ws ":" element.
+  array = "[" ws value ws "," elements "]".
+  number = integer fraction exponent.  
+  integer = onenine.
+  onenine = "1".
+  fraction = "^".
+  exponent = "e" sign digits.
+  sign = "-".
+  digits = digit.
+  digit = "0".
+  ws = "_".
+PRODUCTIONS
+  parse = json.
+END parse.

@@ -15,12 +15,18 @@ import grammar.generator.TreeGenerator;
 import grammar.grammar.Grammar;
 import grammar.grammar.Terminal;
 import compiler.coco.CompilerGenerator;
-import compilers.advexpr.AdvExprParser;
-import compilers.expr.ExprParser;
-import compilers.hello.HelloParser;
-import compilers.json.JsonParser;
-import compilers.mail.MailParser;
-import compilers.url.UrlParser;
+import compilers.antlr.advexpr.ANTLRAdvExprParser;
+import compilers.antlr.expr.ANTLRExprParser;
+import compilers.antlr.hello.ANTLRHelloParser;
+import compilers.antlr.json.ANTLRJsonParser;
+import compilers.antlr.mail.ANTLRMailParser;
+import compilers.antlr.url.ANTLRUrlParser;
+import compilers.coco.advexpr.AdvExprParser;
+import compilers.coco.expr.ExprParser;
+import compilers.coco.hello.HelloParser;
+import compilers.coco.json.JsonParser;
+import compilers.coco.mail.MailParser;
+import compilers.coco.url.UrlParser;
 import at.scch.codeanalytics.frontend.java.JavaFrontend;
 import fuzzer.FuzzingBasedGrammarLearner;
 import fuzzer.ITarget;
@@ -30,15 +36,13 @@ import at.scch.codeanalytics.gastm.CompilationUnit;
 public class FuzzingBasedGrammarLearnerTest {
 	
 	
-	private static String PATH = "src/test/java/at/scch/codeanalytics/fuzz/test/parser/";
-
 	
 	@Test
 	public void genCompiler() throws IOException {
 		
 		try {
 
-		CompilerGenerator.genCompiler(new File("src/main/java/at/scch/codeanalytics/compile/generator/compilers/url/url.atg"));
+		CompilerGenerator.genCompiler(new File("/compile/generator/compilers/url/url.atg"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,11 +54,10 @@ public class FuzzingBasedGrammarLearnerTest {
 		
 		String JAVA_CLASS_NAME = "Parser";
 		String JAVA_METHOD_NAME = "parse";
-		String PATH = "src/compilers/expr/";
+		String PATH = "src/compilers/coco/expr/";
 		
-		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/expr/ExprGen.atg"));
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/coco/expr/ExprGen.atg"));
 		
-		File targetFile = new File(this.PATH + JAVA_CLASS_NAME + ".java");
 		Set<Terminal> alphabet = targetGrammar.getTerminals();
 		
 		final IResultValidation v = new IResultValidation() {
@@ -73,7 +76,7 @@ public class FuzzingBasedGrammarLearnerTest {
 				return ExprParser.parse(input);
 			}
 		};
-		Grammar seed = GrammarParser.parse(new File("src/compilers/expr/ExprGenSeed.atg"));
+		Grammar seed = GrammarParser.parse(new File("src/compilers/coco/expr/ExprGenSeed.atg"));
 		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));
 		
 		try {		
@@ -98,8 +101,8 @@ public class FuzzingBasedGrammarLearnerTest {
 		String JAVA_CLASS_NAME = "Parser";
 		String JAVA_METHOD_NAME = "Parse";
 		
-		String PATH = "src/compilers/mail/";
-		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/mail/Mail.atg"));
+		String PATH = "src/compilers/coco/mail/";
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/coco/mail/Mail.atg"));
 
 		
 		Set<Terminal> alphabet = targetGrammar.getTerminals();
@@ -128,7 +131,7 @@ public class FuzzingBasedGrammarLearnerTest {
 		};
 		
 		System.out.println("Initializing fuzzer and learning components ...");
-		Grammar seed = GrammarParser.parse(new File("src/compilers/mail/MailSeed.atg"));
+		Grammar seed = GrammarParser.parse(new File("src/compilers/coco/mail/MailSeed.atg"));
 		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));
 		
 		System.out.println("Everything set up - starting to learn ...");
@@ -149,11 +152,10 @@ public class FuzzingBasedGrammarLearnerTest {
 		
 		String JAVA_CLASS_NAME = "Parser";
 		String JAVA_METHOD_NAME = "parse";
-		String PATH = "src/compilers/hello/";
+		String PATH = "src/compilers/coco/hello/";
 		
-		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/hello/Hello.atg"));
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/coco/hello/Hello.atg"));
 		
-		File targetFile = new File(this.PATH + JAVA_CLASS_NAME + ".java");
 		Set<Terminal> alphabet = targetGrammar.getTerminals();
 		
 		final IResultValidation v = new IResultValidation() {
@@ -172,7 +174,7 @@ public class FuzzingBasedGrammarLearnerTest {
 				return HelloParser.parse(input);
 			}
 		};
-		Grammar seed = GrammarParser.parse(new File("src/compilers/hello/HelloSeed.atg"));
+		Grammar seed = GrammarParser.parse(new File("src/compilers/coco/hello/HelloSeed.atg"));
 		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));		
 		
 		long startTime = System.nanoTime();
@@ -193,8 +195,8 @@ public class FuzzingBasedGrammarLearnerTest {
 			String JAVA_CLASS_NAME = "Parser";
 			String JAVA_METHOD_NAME = "Parse";
 			
-			String PATH = "src/compilers/advexpr/";
-			Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/advexpr/advexpr.atg"));
+			String PATH = "src/compilers/coco/advexpr/";
+			Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/coco/advexpr/advexpr.atg"));
 
 			
 			Set<Terminal> alphabet = targetGrammar.getTerminals();
@@ -223,7 +225,7 @@ public class FuzzingBasedGrammarLearnerTest {
 			};
 			
 			System.out.println("Initializing fuzzer and learning components ...");
-			Grammar seed = GrammarParser.parse(new File("src/compilers/advexpr/advexprSeed.atg"));
+			Grammar seed = GrammarParser.parse(new File("src/compilers/coco/advexpr/advexprSeed.atg"));
 			FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));
 			
 			System.out.println("Everything set up - starting to learn ...");
@@ -248,8 +250,8 @@ public class FuzzingBasedGrammarLearnerTest {
 			String JAVA_CLASS_NAME = "Parser";
 			String JAVA_METHOD_NAME = "Parse";
 			
-			String PATH = "src/compilers/json/";
-			Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/json/json.atg"));
+			String PATH = "src/compilers/coco/json/";
+			Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/coco/json/json.atg"));
 
 			
 			Set<Terminal> alphabet = targetGrammar.getTerminals();
@@ -278,7 +280,7 @@ public class FuzzingBasedGrammarLearnerTest {
 			};
 			
 			System.out.println("Initializing fuzzer and learning components ...");
-			Grammar seed = GrammarParser.parse(new File("src/compilers/json/JsonSeed.atg"));
+			Grammar seed = GrammarParser.parse(new File("src/compilers/coco/json/JsonSeed.atg"));
 			FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 10000, new Random(42));
 			
 			System.out.println("Everything set up - starting to learn ...");
@@ -303,8 +305,8 @@ public class FuzzingBasedGrammarLearnerTest {
 			String JAVA_CLASS_NAME = "Parser";
 			String JAVA_METHOD_NAME = "Parse";
 			
-			String PATH = "src/compilers/url/";
-			Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/url/url.atg"));
+			String PATH = "src/compilers/coco/url/";
+			Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/coco/url/url.atg"));
 
 			
 			Set<Terminal> alphabet = targetGrammar.getTerminals();
@@ -333,7 +335,7 @@ public class FuzzingBasedGrammarLearnerTest {
 			};
 			
 			System.out.println("Initializing fuzzer and learning components ...");
-			Grammar seed = GrammarParser.parse(new File("src/compilers/url/urlseed.atg"));
+			Grammar seed = GrammarParser.parse(new File("src/compilers/coco/url/urlseed.atg"));
 			FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 10000, new Random(42));
 			
 			System.out.println("Everything set up - starting to learn ...");
@@ -345,6 +347,266 @@ public class FuzzingBasedGrammarLearnerTest {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+	}
+	
+	
+	@Test
+	public void testWithANTLRExprParser() throws Exception {
+		String JAVA_CLASS_NAME = "ExprParser";
+		String JAVA_METHOD_NAME = "parse";
+		String PATH = "src/compilers/antlr/expr/";
+		
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/antlr/expr/ExprGen.atg"));
+		
+		Set<Terminal> alphabet = targetGrammar.getTerminals();
+		
+		final IResultValidation v = new IResultValidation() {
+
+			@Override
+			public boolean validate(TreeNode result) {
+				if (result == null) { return false; }
+				return true;
+			}
+		};
+
+		final ITarget t = new ITarget() {
+
+			@Override
+			public TreeNode execute(String input) {
+				return ANTLRExprParser.parse(input);
+			}
+		};
+		Grammar seed = GrammarParser.parse(new File("src/compilers/antlr/expr/ExprGenSeed.atg"));
+		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(21));
+		
+		try {		
+			
+			long startTime = System.nanoTime();
+			Grammar learnedGrammar = fuzzer.learn();		
+			System.out.println("Time elapsed: " + ((System.nanoTime()-startTime))/1000000000 + "s");
+			
+			
+			testGrammars(learnedGrammar, targetGrammar, t, v);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	public void testWithANTLRAdvExprParser() throws Exception {
+		String JAVA_CLASS_NAME = "AdvExprParser";
+		String JAVA_METHOD_NAME = "parse";
+		String PATH = "src/compilers/antlr/advexpr/";
+		
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/antlr/advexpr/AdvExpr.atg"));
+		
+		Set<Terminal> alphabet = targetGrammar.getTerminals();
+		
+		final IResultValidation v = new IResultValidation() {
+
+			@Override
+			public boolean validate(TreeNode result) {
+				if (result == null) { return false; }
+				return true;
+			}
+		};
+
+		final ITarget t = new ITarget() {
+
+			@Override
+			public TreeNode execute(String input) {
+				return ANTLRAdvExprParser.parse(input);
+			}
+		};
+		Grammar seed = GrammarParser.parse(new File("src/compilers/antlr/advexpr/AdvExprSeed.atg"));
+		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));
+		
+		try {		
+			
+			long startTime = System.nanoTime();
+			Grammar learnedGrammar = fuzzer.learn();		
+			System.out.println("Time elapsed: " + ((System.nanoTime()-startTime))/1000000000 + "s");
+			
+			
+			testGrammars(learnedGrammar, targetGrammar, t, v);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testWithANTLRHelloParser() throws Exception {
+		String JAVA_CLASS_NAME = "HelloParser";
+		String JAVA_METHOD_NAME = "parse";
+		String PATH = "src/compilers/antlr/hello/";
+		
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/antlr/hello/Hello.atg"));
+		
+		Set<Terminal> alphabet = targetGrammar.getTerminals();
+		
+		final IResultValidation v = new IResultValidation() {
+
+			@Override
+			public boolean validate(TreeNode result) {
+				if (result == null) { return false; }
+				return true;
+			}
+		};
+
+		final ITarget t = new ITarget() {
+
+			@Override
+			public TreeNode execute(String input) {
+				return ANTLRHelloParser.parse(input);
+			}
+		};
+		Grammar seed = GrammarParser.parse(new File("src/compilers/antlr/hello/HelloSeed.atg"));
+		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));
+		
+		try {		
+			
+			long startTime = System.nanoTime();
+			Grammar learnedGrammar = fuzzer.learn();		
+			System.out.println("Time elapsed: " + ((System.nanoTime()-startTime))/1000000000 + "s");
+			
+			
+			testGrammars(learnedGrammar, targetGrammar, t, v);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testWithANTLRMailParser() throws Exception {
+		String JAVA_CLASS_NAME = "MailParser";
+		String JAVA_METHOD_NAME = "parse";
+		String PATH = "src/compilers/antlr/mail/";
+		
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/antlr/mail/Mail.atg"));
+		
+		Set<Terminal> alphabet = targetGrammar.getTerminals();
+		
+		final IResultValidation v = new IResultValidation() {
+
+			@Override
+			public boolean validate(TreeNode result) {
+				if (result == null) { return false; }
+				return true;
+			}
+		};
+
+		final ITarget t = new ITarget() {
+
+			@Override
+			public TreeNode execute(String input) {
+				return ANTLRMailParser.parse(input);
+			}
+		};
+		Grammar seed = GrammarParser.parse(new File("src/compilers/antlr/mail/MailSeed.atg"));
+		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 1000, new Random(42));
+		
+		try {		
+			
+			long startTime = System.nanoTime();
+			Grammar learnedGrammar = fuzzer.learn();		
+			System.out.println("Time elapsed: " + ((System.nanoTime()-startTime))/1000000000 + "s");
+			
+			
+			testGrammars(learnedGrammar, targetGrammar, t, v);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testWithANTLRJsonParser() throws Exception {
+		String JAVA_CLASS_NAME = "JsonParser";
+		String JAVA_METHOD_NAME = "parse";
+		String PATH = "src/compilers/antlr/json/";
+		
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/antlr/json/Json.atg"));
+		
+		Set<Terminal> alphabet = targetGrammar.getTerminals();
+		
+		final IResultValidation v = new IResultValidation() {
+
+			@Override
+			public boolean validate(TreeNode result) {
+				if (result == null) { return false; }
+				return true;
+			}
+		};
+
+		final ITarget t = new ITarget() {
+
+			@Override
+			public TreeNode execute(String input) {
+				return ANTLRJsonParser.parse(input);
+			}
+		};
+		Grammar seed = GrammarParser.parse(new File("src/compilers/antlr/json/JsonSeed.atg"));
+		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 10000, new Random(42));
+		
+		try {		
+			
+			long startTime = System.nanoTime();
+			Grammar learnedGrammar = fuzzer.learn();		
+			System.out.println("Time elapsed: " + ((System.nanoTime()-startTime))/1000000000 + "s");
+			
+			
+			testGrammars(learnedGrammar, targetGrammar, t, v);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testWithANTLRUrlParser() throws Exception {
+		String JAVA_CLASS_NAME = "UrlParser";
+		String JAVA_METHOD_NAME = "parse";
+		String PATH = "src/compilers/antlr/url/";
+		
+		Grammar targetGrammar = GrammarParser.parse(new File("src/compilers/antlr/url/Url.atg"));
+		
+		Set<Terminal> alphabet = targetGrammar.getTerminals();
+		
+		final IResultValidation v = new IResultValidation() {
+
+			@Override
+			public boolean validate(TreeNode result) {
+				if (result == null) { return false; }
+				return true;
+			}
+		};
+
+		final ITarget t = new ITarget() {
+
+			@Override
+			public TreeNode execute(String input) {
+				return ANTLRUrlParser.parse(input);
+			}
+		};
+		Grammar seed = GrammarParser.parse(new File("src/compilers/antlr/url/UrlSeed.atg"));
+		FuzzingBasedGrammarLearner fuzzer = new FuzzingBasedGrammarLearner(alphabet, seed, t, JAVA_CLASS_NAME, JAVA_METHOD_NAME, PATH, v, 10000, new Random(42));
+		
+		try {		
+			
+			long startTime = System.nanoTime();
+			Grammar learnedGrammar = fuzzer.learn();		
+			System.out.println("Time elapsed: " + ((System.nanoTime()-startTime))/1000000000 + "s");
+			
+			
+			testGrammars(learnedGrammar, targetGrammar, t, v);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void testGrammars(Grammar learned, Grammar target, ITarget target_parser, IResultValidation val) throws MalformedURLException, IOException {

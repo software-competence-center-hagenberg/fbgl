@@ -1,0 +1,9 @@
+COMPILER parse
+PRODUCTIONS
+  parse = expr.
+  expr = term.
+  term = factor.
+  factor = num.
+  num = digit.
+  digit = "1".
+END parse.

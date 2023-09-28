@@ -1,0 +1,10 @@
+COMPILER parse
+TOKENS
+  expr = term.
+  term = factor .
+  factor = "1".
+
+PRODUCTIONS
+  parse = expr.
+
+END parse.

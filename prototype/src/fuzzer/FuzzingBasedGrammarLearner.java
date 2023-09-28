@@ -119,6 +119,7 @@ public class FuzzingBasedGrammarLearner {
 				NLstar learner = new NLstar(new ArrayList<Element>(alphabet), teacher, LAMBDA);								// TODO change used learning algorithm here
 				
 				Automata M = learner.learn();
+				if (M == null) { continue; }
 				Grammar result = teacher.buildGrammar(M);
 				
 				addLearnedRule(learnedGrammar, result, alphabet, functionName);

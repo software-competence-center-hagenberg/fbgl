@@ -1,0 +1,11 @@
+COMPILER parse
+TOKENS
+  mail = string "@" string "." tag.
+  string = character.
+  tag = character character.
+  character = "a".
+
+PRODUCTIONS
+parse = mail.
+
+END parse.

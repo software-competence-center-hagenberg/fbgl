@@ -32,5 +32,6 @@
 	<classpathentry kind="lib" path="lib/eknows-commons-1.0.6-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/eknows-frontend-common-1.0.6-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/eknows-rulebook-1.0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-4.13.1-complete.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
